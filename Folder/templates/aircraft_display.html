@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} AIRCRAFT {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <h2> Manage <b>Aircraft</b>
+                        <a href="/aircraft_insert" class="btn btn-danger btn-xs"> Add New Aircraft </a>
+                    </h2>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismisable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Rego</th>
+                            <th>make</th>
+                            <th>self_lch</th>
+                            <th>Initials</th>
+                            <th>Pilot</th>
+                            <th>Acft Class</th>
+                        </tr>
+
+                        {% for row in aircraft %}
+                            <tr>
+                                <td>{{ row.id }}</td>
+                                <td>{{ row.registration }}</td>
+                                <td>{{ row.make }}</td>
+                                <td>{{ row.self_launch }}</td>
+                                <td>{{ row.pilot_initials }}</td>
+                                <td>{{ row.normal_pilot }}</td>
+                                <td>{{ row.acft_class }}</td>
+                                <td>
+                                    <a href="/aircraft_update/{{ row.id }}" class="btn btn-warning btn-xs">Update</a>
+                                    <a href="/aircraft_delete/{{ row.id }}" class="btn btn-danger btn-xs"
+                                       onclick="return confirm('Are you sure?')"> Delete</a>
+                                </td>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

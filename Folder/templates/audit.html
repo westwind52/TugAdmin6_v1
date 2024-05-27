@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Audit {% endblock %}
+
+{% block body %}
+
+<div class="container border bg-success text-green pt-4 col-md-7">
+<form method="POST">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <div  >
+                <h5><label  class="form-control-label text-white text-right"> Start Date</label></h5>
+            </div>
+        </div>
+        <div class="col-md-auto">
+                 <input type="date" class="form-control "  id="start_date" name="start_date"
+            value = {{ start_date }}>
+        </div>
+         <div class="col-md-auto">
+            <div class="mx-1">
+                <h5><label class="form-control-label text-white "> End Date</label></h5>
+            </div>
+        </div>
+        <div class="col-md-auto">
+                 <input type="date" class="form-control"  id="end_date" name="end_date" value = {{ end_date }}>
+        </div>
+        <div class="col-md-auto">
+            <div class="mx-2" >
+                <h5><label style="width: 80px;" class="form-control-label text-white text-right"> Sheet Id</label></h5>
+            </div>
+        </div>
+        <div class="col-md-auto">
+                 <input type="number" style="width: 100px;" class="form-control"  id="sheet_id" name="sheet_id">
+                <br>
+        </div>
+                <div class="col-md-auto">
+                 <button class="btn btn-outline-light" type="submit" >Submit</button>
+                <br>
+        </div>
+    </div>
+</form>
+
+</div>
+
+{% endblock %}

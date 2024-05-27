@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} TGC Operations {% endblock %}
+
+{% block body %}
+    <div class="container" >
+        <div class="pt-5 mx-auto">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+                <div class="container-lg">
+                    <a class="navbar-brand" href="#">TGC Flight Operations Manager</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                          data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                          aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" href='/'>Home</a>
+                        <a class="nav-link" href='/flight_edit'>Flights</a>
+                        <a class="nav-link" href='/all_tows_load'>Tows</a>
+                        <a class="nav-link" href='/analyse'> Analyse </a>
+                        <a class="nav-link" href='/launches'>Launches</a>
+                        <a class="nav-link" href="/aircraft">Aircraft</a>
+                        <a class="nav-link" href="/pilots">Pilots</a>
+                        <a class="nav-link" href="/operations" >Operations</a>
+                        <a class="nav-link" href="/main_audit" >Audit</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="bg-light p-1 rounded-lg m-3"></div>
+        </div>
+    </div>
+{% endblock %}}

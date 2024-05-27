@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "macros.html" import render_field %}
+
+
+{% block title %} TUG ADD {% endblock %}
+
+{% block body %}
+    <div class="container col-md-3 mx-auto ">
+        <h1> Tug Insert </h1>
+    </div>
+
+    <div class="container border  col-md-3" style=background-color:#C8E6C9;">
+
+        <form  method="POST">
+        {{ form.hidden_tag() }}
+            <div class="col-md-6 col-lg-8 mx-lg-auto mx-md-auto">
+
+                 {{ render_field(form.registration, size="5") }}
+                 {{ render_field(form.take_off_date, value=to_date, size="10" ) }}
+                 {{ render_field(form.take_off_time, size="5") }}
+                  <p class="pt-5"><strong>{{ message }}</strong></p>
+                 <button class="btn-primary btn-xs" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+{% endblock %}

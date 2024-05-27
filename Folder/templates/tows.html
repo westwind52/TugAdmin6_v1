@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} FLIGHTS and TOWS {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+
+                    <h2> Manage <b>Tows</b> <br>
+                        <form method="POST">
+
+                            <a href="/analyse" class="btn btn-danger btn-xs"> Analyse </a>
+                            <a href="/tug_add" class="btn btn-warning btn-xs"> New Tow </a>
+                            <button class="btn btn-primary" type="submit" >Submit</button>
+                        </form>
+                    </h2>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Pilot 1</th>
+                            <th>Pilot 2</th>
+                            <th>Tug</th>
+                            <th>Glider</th>
+                            <th>OGN Ht</th>
+                            <th>Launch_Ht</th>
+                            <th>TkOff</th>
+                            <th>Gld Land</th>
+
+                        </tr>
+
+                        {% for row in tows %}
+                                <tr>
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.pilot1_name }}</td>
+                                    <td>{{ row.pilot2_name }}</td>
+                                    <td>{{ row.tug }}</td>
+                                    <td>{{ row.glider }}</td>
+                                    <td>{{ row.OGN_ht }}</td>
+                                    <td>{{ row.launch_ht }}</td>
+                                    <td>{{ row.to_time_str }}</td>
+                                    <td>{{ row.ld_time_str }}</td>
+                                    <td>
+                                        <a href="/tug_update/{{ row.id }}" class="btn btn-warning btn-sm">Update Tug</a>
+                                        <a href="/glider_update/{{ row.id }}" class="btn btn-success btn-sm">Glider Update</a>
+                                        <a href="/glider_add/{{ row.id }}" class="btn btn-success btn-sm">Add</a>
+                                        <a href="/glider_delete/{{ row.id }}" class="btn btn-success btn-sm">Delete</a>
+                                    </td>
+                                </tr>
+                         {% endfor %}
+                    </table>
+    </div>
+
+
+{% endblock %}

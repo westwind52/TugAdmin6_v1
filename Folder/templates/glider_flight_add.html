@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Glider Insert {% endblock %}
+{% from "macros.html" import render_field %}
+
+{% block body %}
+    <div class="container">
+
+        <div class="container col-md-6 mx-auto ">
+            <h1> Glider Flight </h1>
+        </div>
+        <div class="container border  col-md-6" style=background-color:#C8E6C9;">
+            <form  method="POST">
+                {{ form.hidden_tag() }}
+                 <div class="col-md-6 text-left " style=color:#1B5E20;>
+                     <div class="form-group">
+                         {{  render_field(form.glider, size="4") }}
+                         {{  render_field(form.pilot_name) }}
+                         {{  render_field(form.glider_take_off, size="8") }}
+                         {{  render_field(form.glider_land, size="8") }}
+                        <button class="btn-primary btn-xs" type="submit">Add Glider</button>
+                     </div>
+                 </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock%}

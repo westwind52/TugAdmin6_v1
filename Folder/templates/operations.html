@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Operations {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <h2> Manage <b>Ops Days</b>
+                        <a href="/ops_day_insert" class="btn btn-danger btn-xs"> Add New Ops Day </a>
+                        <a href="/ops_day_delete" class="btn btn-danger btn-xs"> Delete Ops Day </a>
+                    </h2>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismisable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Sheet Id</th>
+                            <th>Date</th>
+
+                        </tr>
+
+                        {% for key in ops_data %}
+                            <tr>
+                                <td>{{ key }}</td>
+                                <td>{{ ops_data[key] }}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

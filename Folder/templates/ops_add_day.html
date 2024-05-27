@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Add Operations Day {% endblock %}
+
+{% block body %}
+    <div class="container border bg-light text-green col-md-3" >
+        <div class="row">
+            <div class="col md-6">
+
+                <form action ='' method='POST'>
+                    {{ form.hidden_tag() }}
+                    <div class="col-md-6 col-md-8 mx-lg-auto mx-md-auto" style="width: 200px;">
+                        <h1 class="pt-5 pb-2">Add Day</h1>
+                          {{ wtf.form_field(form.sheet_id) }}
+                          {{ wtf.form_field(form.flying_day) }}
+                        <br>
+                         <button class="btn-primary btn-xs" type="submit">Add Day</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

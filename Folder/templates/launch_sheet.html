@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Launches {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismisable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <h2> Review Launch (Flight) Sheets  </h2>
+                        <div class="row">
+                        <form method="POST">
+                            <button type="button" class="btn btn-primary btn-lg">{{ "Sheet "+sheet }}</button>
+                            <label>Enter Sheet Id</label>
+                            <input type="number" name="sheet_id" size="3" value={{ sheet }}>
+                            <label class="form-control-label"> Ops Date</label>
+                            <input type="date"  name="ops_date" value = {{ ops_date }}>
+                            <input type="checkbox" name="summary" id="summary"
+                                   value="sum_on"{{ 'checked ="checked"' if chkflag }} >
+                            <label class="custom-control-label" for="summary"> Summary </label>
+                            <a href="/upload_launch_sheet" class=" btn btn-secondary btn-xs"> Write Launch Sheet</a>
+                            <a href="/delete_launch_sheet" class=" btn btn-secondary btn-xs"> Delete Launch Sheet</a>
+                            <button class="btn btn-info btn-xs " type="submit" >Submit</button>
+                            <a href="/flight_edit" class=" btn btn-secondary btn-xs float-right"> Return Flights</a>
+
+                        </form>
+                        </div>
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Date</th>
+                            <th>Tow</th>
+                            <th>Payer</th>
+                            <th>Tug</th>
+                            <th>Glider</th>
+                            <th>TkOff</th>
+                            <th>Release</th>
+                            <th>T FltTime</th>
+                            <th>G FltTime</th>
+                            <th>Tow Cost</th>
+                            <th>Glider</th>
+                            <th>status</th>
+                        </tr>
+
+                        {% for row in flt_data %}
+                            <tr>
+                                <td>{{ row.tow_date_dt.strftime("%Y-%m-%d") }}</td>
+                                <td>{{ row.tow }}</td>
+                                <td>{{ row.payer }}</td>
+                                <td>{{ row.tug_id }}</td>
+                                <td>{{ row.glider_id }}</td>
+                                <td>{{ row.tug_to_str }}</td>
+                                <td>{{ row.billed_ht }}</td>
+                                <td>{{ row.t_flt_time }}</td>
+                                <td>{{ row.g_flt_time }}</td>
+                                <td>{{ '%0.2f'|format(row.tow_cost|float) }}</td>
+                                <td>{{ '%0.2f'|format(row.glider_cost|float) }}</td>
+                                <td>{{ row.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

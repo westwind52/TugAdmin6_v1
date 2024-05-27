@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Home {% endblock %}
+{% block body %}
+    <div class="container border pt-5  bg-light text-green col-lg-4">
+        <h1><p class="text-center display-1">HOME PAGE</p></h1>
+        <br>
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <br>
+        <div class="container p-4 bg-light">
+            <div class="=row">
+                <div class="input-group mb-3">
+                    <button type="button" class="btn btn-success btn-lg"> Tows</button>
+                    <input type="text" class="form-control-lg text-success"
+                           name="tows" value= {{ tows }}>
+                </div>
+                <br>
+                <div class="input-group mb-3">
+                    <button type="button" class="btn btn-success btn-lg"> Month</button>
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                           aria-describedby="inputGroup-sizing-lg" value= {{ this_month }}>
+                </div>
+                <br>
+                <div class="input-group mb-3">
+                    <button type="button" class=" btn btn-success btn-lg"> Year</button>
+                    <input type="text" class="form-control-lg text-success"
+                           name="year" value= {{ this_year }}>
+                </div>
+                <br>
+            </div>
+
+            <form method="POST">
+                <div class="=row">
+                    <div class="col">
+                        <button type="button" class="btn btn-warning btn-lg"> Set Ops Date -></button>
+                        <input type="date" class="form-control-lg text-success" name="ops_date" value= {{ ops_date }}>
+                    </div>
+                    <br>
+                    <div class="col">
+                        <button class="btn btn-success btn-lg" type="submit"> Submit</button>
+                    </div>
+                    <br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-text">
+                            <label class="form-check-label  form-control-lg text-success" for="ktrax"> Import
+                                Ktrax</label>
+                            <input class="form-check-input mt-2" type="checkbox" value=""
+                                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

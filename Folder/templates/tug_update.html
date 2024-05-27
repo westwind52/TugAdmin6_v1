@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} TUG UPDATE {% endblock %}
+
+{% block body %}
+    <div class="container border bg-light text-green col-md-6">
+        <div class="row">
+            <div class="col md-12">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismisable" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                 <div class="container mt-3 bg-success">
+
+
+                    <form  method="POST">
+                        {{ form.hidden_tag() }}
+                            <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+                              <h1 class="pt-5 pb-2 text-light">Update Tow</h1>
+                                {% for field, errors in form.errors.items() %}
+                                <small class="form-text text-muted ">
+                                    {{ ', '.join(errors) }}
+                                </small>
+                                {% endfor %}
+                                <div class="row g-2">
+                                  {{ form.sheet_number.label(class="text-light") }} {{ form.sheet_number }}<br>
+
+                                    {{ form.tug.label(class=" text-light",for="registration") }}
+                                      {{ form.tug(class="form-control", id="registration")}}
+                                    {% for error in form.tug.errors %} {{ error }} {% endfor%}<br>
+
+                                  {{ form.take_off_date.label(class="text-light") }} {{ form.take_off_date }}<br>
+                                    {% for error in form.take_off_date.errors %} {{ error }} {% endfor%}
+
+                                  {{ form.take_off_time.label(class="text-light") }} {{ form.take_off_time }}<br>
+                                    {% for error in form.take_off_time.errors %} time {{ error }} {% endfor%}
+
+                                  {{ form.landing_time.label(class="text-light") }}{{ form.landing_time }}<br>
+                                    {% for error in form.landing_time.errors %} {{ error }} {% endfor%}
+
+
+                                  {{ form.OGN_ht.label(class="text-light") }} {{ form.OGN_ht }}<br>
+                                  {{ form.launch_ht.label(class="text-light") }} {{ form.launch_ht  }}<br>
+                                </div>
+                                 <button class="btn-primary btn-xs mb-2" type="submit">Update</button>
+                            </div>
+                    </form>
+                 </div>
+                </div>
+        </div>
+    </div>
+
+
+{% endblock %}

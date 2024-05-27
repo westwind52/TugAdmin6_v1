@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "macros.html" import render_field %}
+
+{% block title %} GLIDER UPDATE {% endblock %}
+
+{% block body %}
+    <div class="container col-md-6 mx-auto ">
+        <h1> Glider Update </h1>
+    </div>
+    <div class="container border bg-light text-green col-md-6">
+        <div class="row">
+            <div class="col md-12">
+                <div class="container mt-3 bg-success">
+                <form  method="POST">
+                    {{ form.hidden_tag() }}
+                        {{ render_field(form.glider_rego, size="3") }}
+                        {{ render_field(form.pilot_name, size="10") }}
+                        {{ render_field(form.pilot2_name, size="10") }}
+                        {{ render_field(form.glider_take_off, size="10") }}
+                        {{ render_field(form.glider_land, size="10") }}
+                    <button class="btn-primary btn-xs mb-2" type="submit">Update</button>
+                   </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

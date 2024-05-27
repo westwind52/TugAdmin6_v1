@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} FLIGHTS {% endblock %}
+
+
+{% block body %}
+    <div class="container">
+
+                    <h2> Manage <b>Flights</b> <br>
+                        <form method="POST">
+                            <button type="button" class="btn btn-primary">{{ flights[0].to_date_str }}</button>
+                            <button type="button" class="btn btn-primary"> Sheet {{ flights[0].sheet_number }}</button>
+                            <a href="/tug_add" class="btn btn-success float-right"> Add New Tow</a>
+                            <a href="/analyse" class="btn btn-danger btn-xs"> Analyse </a>
+                            <button type="button" class="btn btn-primary"> Ops Date</button>
+                            <input type="date"  name="ops_date" value = {{ ops_date }}>
+                            <button class="btn btn-primary" type="submit" >Submit</button>
+                        </form>
+                    </h2>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Sheet</th>
+                            <th>Class</th>
+                            <th>TkOff</th>
+                            <th>Land</th>
+                            <th>Acft</th>
+                            <th>Pilot</th>
+                            <th>OGN Ht</th>
+                            <th>Release</th>
+                            <th>FltTime</th>
+                            <th>Cost</th>
+                            <th>Status</th>
+                        </tr>
+
+                        {% for row in flights %}
+                            {% if row.flt_class == 'TUG' %}
+                                <tr>
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.sheet_number }}</td>
+                                    <td>{{ row.flt_class }}</td>
+                                    <td>{{ row.to_time_str }}</td>
+                                    <td>{{ row.ld_time_str }}</td>
+                                    <td>{{ row.aircraft }}</td>
+                                    <td></td>
+                                    <td>{{ row.OGN_ht }}</td>
+                                    <td>{{ row.launch_ht }}</td>
+                                    <td>{{ row.flt_time }}</td>
+                                    <td>{{ row.cost }}</td>
+                                    <td>{{ row.status }}</td>
+                                    <td>
+                                        <a href="/tug_update/{{ row.id }}" class="btn btn-warning btn-sm">Update Tug</a>
+                                        <a href="/glider_add/{{ row.id }}" class="btn btn-success btn-sm">Add Glider</a>
+                                        <a href="/flights_flight_verify/{{ row.id }}" class="btn btn-info btn-sm">Verify</a>
+                                     {#   <a href="/flight_delete/{{ row.id }}" class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Are you sure?')">Delete</a> #}
+                                    </td>
+                                </tr>
+                            {% elif row.flt_class == 'GLIDER' %}
+                                <tr>
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.sheet_number }}</td>
+                                    <td>{{ row.flt_class }}</td>
+                                    <td>{{ row.to_time_str }}</td>
+                                    <td>{{ row.ld_time_str }}</td>
+                                    <td>{{ row.aircraft }}</td>
+                                    <td>{{ row.pilot_name }}</td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>{{ row.flt_time }}</td>
+                                    <td>{{ row.cost }}</td>
+                                    <td>{{ row.status }}</td>
+                                    <td>
+                                        <a href="/glider_update/{{ row.id }}" class="btn btn-warning btn-sm">Update Glider</a>
+                                        <a href="/flights_flight_verify/{{ row.id }}" class="btn btn-info btn-sm">Verify</a>
+                                        <a href="/glider_delete/{{ row.id }}" class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Are you sure?')">Delete</a>
+                                    </td>
+                                </tr>
+                            {% elif row.flt_class == 'CLUB' %}
+                                <tr>
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.sheet_number }}</td>
+                                    <td>{{ row.flt_class }}</td>
+                                    <td>{{ row.to_time_str }}</td>
+                                    <td>{{ row.ld_time_str }}</td>
+                                    <td>{{ row.aircraft }}</td>
+                                    <td>{{ row.pilot_name }}</td>
+                                    <td>  </td>
+                                    <td>  </td>
+                                    <td>{{ row.flt_time }}</td>
+                                    <td>{{ '%0.2f' % row.cost }}</td>
+                                    <td>{{ row.status }}</td>
+                                    <td>
+                                        <a href="/glider_update/{{ row.id }}" class="btn btn-warning btn-sm">Update Glider</a>
+                                        <a href="/flight_verify/{{ row.id }}" class="btn btn-info btn-sm">Verify</a>
+                                        <a href="/glider_delete/{{ row.id }}" class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Are you sure?')">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </table>
+
+                </div>
+
+
+{% endblock %}

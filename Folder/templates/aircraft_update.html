@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} AIRCRAFT UPDATE {% endblock %}
+
+{% block body %}
+    <div class="container border bg-light text-green col-md-3">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="col-md-6 alert alert-success alert-dismisable"
+                                     role="alert" style="width: 300px;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <div class="container mt-3 bg-success">
+                    <form  method="POST">
+                        {{ form.hidden_tag()}}
+                        <div class="col-md-6 col-md-8 mx-lg-auto mx-md-auto" style="width: 200px;">
+                            <h1 class="pt-5 pb-2 text-light">Update</h1>
+                              {{  form.registration.label(class="text-light") }} {{ form.registration  }}
+                              {{  form.make.label(class="text-light") }}  {{ form.make  }}
+                              {{  form.pilot_initials.label(class="text-light") }}  {{ form.pilot_initials }}
+                              {{  form.normal_pilot.label(class="text-light") }} {{ form.normal_pilot }}
+                              {{  form.acft_class.label(class="text-light") }} {{ form.acft_class }}
+                             <br/>
+                              {{  form.self_launch.label(class="text-light") }}  {{ form.self_launch }}
+                                <br>
+                             <button class="btn-primary btn-xs mt-2 mb-2" type="submit">Update</button>
+                         </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

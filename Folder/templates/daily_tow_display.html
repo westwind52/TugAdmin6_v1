@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Daily Launches {% endblock %}
+
+{% block body %}
+    <div class="container">
+
+                    <form method="POST">
+                        <h2> Review Daily Tows ></h2>
+                            <button type="button" class="btn btn-info">{{ to_date_str }}</button>
+                            <!-- </div> -->
+                            <a href="/all_tows_load" class="btn btn-secondary btn-xs "> Return Tows</a>
+                        <!--
+                            <a href="/save_Launches" class="btn btn-warning btn-xs
+                                float-right" method="POST">Store Launches</a> -->
+                            <button class="btn btn-primary float-right" type="submit" >Submit</button>
+                    </form>
+
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>Tow</th>
+                            <th>Payer</th>
+                            <th>Tug</th>
+                            <th>Glider</th>
+                            <th>TkOff</th>
+                            <th>Tug Ld</th>
+                            <th>Glider Ld</th>
+                            <th>Release</th>
+                            <th>T FltTime</th>
+                            <th>G FltTime</th>
+                            <th>Tow Cost</th>
+                            <th>Glider Cost</th>
+
+                        </tr>
+
+                        {% for row in flt_data %}
+                            <tr>
+                                <td>{{ row.tow }}</td>
+                                <td>{{ row.payer }}</td>
+                                <td>{{ row.tug_rego }}</td>
+                                <td>{{ row.glider_rego }}</td>
+                                <td>{{ row.tug_to_str }}</td>
+                                <td>{{ row.tug_ld_str }}</td>
+                                <td>{{ row.gld_ld_str }}</td>
+                                <td>{{ row.billed_ht }}</td>
+                                <td>{{ row.t_flt_time }}</td>
+                                <td>{{ row.g_flt_time }}</td>
+                                <td>{{ '%0.2f'|format(row.tow_cost|float) }}</td>
+                                <td>{{ '%0.2f'|format(row.glider_cost|float) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+
+{% endblock %}

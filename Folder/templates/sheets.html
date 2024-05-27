@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Sheets {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                  {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismisable" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                  {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <form method="POST">
+            <button class="btn btn-primary" type="submit" >Submit</button>
+                  <br>
+      </form>
+</div>
+{% endblock  %}
